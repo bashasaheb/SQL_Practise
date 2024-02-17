@@ -1,0 +1,66 @@
+--select * from employeeinfo;
+--select * from EmployeePosition;
+--select upper(EMPFNAME) as EmpName from employeeinfo;
+--select count(*) from employeeinfo where department='HR'
+--select sysdate from dual;
+--select substr(EMPLNAME,1,4) from employeeinfo;
+--SELECT SUBSTR(Address, 1, INSTR(Address, '(') - 1) AS Place_Name FROM EmployeeInfo;
+--select instr(address,'(') from EmployeeInfo;
+--create table employeeinfo_bkp as select * from employeeinfo;
+--select * from EmployeePosition where salary between 50000 and 100000;
+--select * from employeeinfo where upper(substr(empfname,1,1))='S';
+--select * from employeeinfo where empfname like 'S%';
+--select * from employeeinfo order by empid fetch first 2 rows only;
+--select EMPFNAME || ' ' || EMPLNAME as FullName from employeeinfo;
+--select count(*), gender from employeeinfo where DOB between '02-MAY-65' and '31-DEC-82' group by gender;
+--select * from employeeinfo order by emplname desc, DEPARTMENT asc;
+--select * from employeeinfo where length(emplname)=5 and upper(emplname) like '%A';
+--select * from employeeinfo where upper(emplname) like '____A';
+--select * from employeeinfo where upper(EMPFNAME) not in ('SANJAY','SONIA');
+--select * from employeeinfo where Address='Delhi(DEL)';
+--select a.EMPFNAME,a.EMPLNAME,b.EMPPOSITION from employeeinfo a, EmployeePosition b where a.EMPID=b.EMPID and b.EMPPOSITION='Manager';
+--select a.EMPFNAME,a.EMPLNAME,b.EMPPOSITION from employeeinfo a inner join EmployeePosition b on a.EMPID=b.EMPID and b.EMPPOSITION='Manager';
+--select count(*), DEPARTMENT from employeeinfo group by DEPARTMENT order by count(*) asc;
+--select * from employeeinfo where mod(empid,2)=0;
+--select * from employeeinfo where mod(empid,2)!=0;
+--select * from employeeinfo where mod(empid,2)<>0;
+--select employeeinfo.*,rownum from employeeinfo;
+--select * from (select employeeinfo.*,rownum as rn from employeeinfo) where mod(rn,2)=0;
+--select * from (select employeeinfo.*,rownum as rn from employeeinfo) where mod(rn,2)!=0;
+--select * from (select employeeinfo.*,rownum as rn from employeeinfo) where mod(rn,2)<>0;
+--select a.* from employeeinfo a join EmployeePosition b on a.empid=b.empid and b.DATEOFJOINING is not null;
+/*select * from (select * from EmployeePosition order by salary desc fetch first 2 rows only) 
+union
+select * from (select * from EmployeePosition order by salary asc fetch first 2 rows only);*/
+/*with ranked_salaries as (select salary, row_number() over (order by salary desc) as salary_rank from EmployeePosition)  
+select salary, salary_rank from ranked_salaries where salary_rank=3;*/
+/*SELECT Department, COUNT(*)
+FROM EmployeeInfo GROUP BY Department
+HAVING COUNT(*) > 1;*/
+--select * from EmployeeInfo order by department asc;
+/*WITH rn AS (SELECT employeeinfo.*, ROW_NUMBER() OVER (ORDER BY EMPID asc) AS pk FROM employeeinfo)
+SELECT *
+FROM rn
+WHERE pk >= (SELECT MAX(pk) - 2 FROM rn);*/
+
+/*SELECT * FROM EmployeeInfo WHERE EmpID <=3 
+UNION 
+SELECT * FROM (SELECT * FROM EmployeeInfo E ORDER BY E.EmpID DESC) E1 WHERE E1.EmpID <=3;*/
+
+/*SELECT EmployeePosition.*, ROW_NUMBER() OVER (ORDER BY salary DESC) AS row_num
+FROM EmployeePosition;*/
+
+/*with yikes as (select EmployeeInfo.*, rownum as hello from EmployeeInfo)
+select * from yikes where hello in ((select min(hello) from yikes),(select max(hello) from yikes))*/
+
+--Write a query to add email validation to your database
+/*ALTER TABLE YourTableName
+ADD CONSTRAINT email_format_check
+CHECK (REGEXP_LIKE(email_column, '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'));*/
+
+--select * from EmployeeInfo where DEPARTMENT=(select DEPARTMENT from EmployeeInfo group by DEPARTMENT having count(*)<2)
+
+--select sum(SALARY),EMPPOSITION from EmployeePosition group by EMPPOSITION;
+
+/*with ko as (select employeeinfo.*, rownum as qa from employeeinfo)
+select * from ko where qa<=(select count(*) from employeeinfo where 1=1)/2*/
