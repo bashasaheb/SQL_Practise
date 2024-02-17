@@ -1,3 +1,48 @@
+--Table and Data related queries
+
+CREATE TABLE EmployeeInfo ( 
+    EmpID INT PRIMARY KEY, 
+    EmpFname VARCHAR(50), 
+    EmpLname VARCHAR(50), 
+    Department VARCHAR(50), 
+    Project VARCHAR(50), 
+    Address VARCHAR(100), 
+    DOB DATE, 
+    Gender CHAR(1) 
+);
+
+INSERT INTO EmployeeInfo (EmpID, EmpFname, EmpLname, Department, Project, Address, DOB, Gender) 
+VALUES (1, 'Sanjay', 'Mehra', 'HR', 'P1', 'Hyderabad(HYD)', TO_DATE('1976-01-12', 'YYYY-MM-DD'), 'M');
+INSERT INTO EmployeeInfo (EmpID, EmpFname, EmpLname, Department, Project, Address, DOB, Gender) 
+VALUES (2, 'Ananya', 'Mishra', 'Admin', 'P2', 'Delhi(DEL)', TO_DATE('1968-05-02', 'YYYY-MM-DD'), 'F');
+INSERT INTO EmployeeInfo (EmpID, EmpFname, EmpLname, Department, Project, Address, DOB, Gender) 
+VALUES (3, 'Rohan', 'Diwan', 'Account', 'P3', 'Mumbai(BOM)', TO_DATE('1980-01-01', 'YYYY-MM-DD'), 'M');
+INSERT INTO EmployeeInfo (EmpID, EmpFname, EmpLname, Department, Project, Address, DOB, Gender) 
+VALUES (4, 'Sonia', 'Kulkarni', 'HR', 'P1', 'Hyderabad(HYD)', TO_DATE('1992-05-02', 'YYYY-MM-DD'), 'F');
+INSERT INTO EmployeeInfo (EmpID, EmpFname, EmpLname, Department, Project, Address, DOB, Gender) 
+VALUES (5, 'Ankit', 'Kapoor', 'Admin', 'P2', 'Delhi(DEL)', TO_DATE('1994-07-03', 'YYYY-MM-DD'), 'M');
+
+CREATE TABLE EmployeePosition ( 
+    EmpID INT, 
+    EmpPosition VARCHAR(50), 
+    DateOfJoining DATE, 
+    Salary INT, 
+    FOREIGN KEY (EmpID) REFERENCES EmployeeInfo(EmpID) 
+);
+
+INSERT INTO EmployeePosition (EmpID, EmpPosition, DateOfJoining, Salary) 
+VALUES (1, 'Manager', TO_DATE('2024-05-01', 'YYYY-MM-DD'), 500000);
+INSERT INTO EmployeePosition (EmpID, EmpPosition, DateOfJoining, Salary) 
+VALUES (2, 'Executive', TO_DATE('2024-05-02', 'YYYY-MM-DD'), 75000);
+INSERT INTO EmployeePosition (EmpID, EmpPosition, DateOfJoining, Salary) 
+VALUES (3, 'Manager', TO_DATE('2024-05-01', 'YYYY-MM-DD'), 90000);
+INSERT INTO EmployeePosition (EmpID, EmpPosition, DateOfJoining, Salary) 
+VALUES (2, 'Lead', TO_DATE('2024-05-02', 'YYYY-MM-DD'), 85000);
+INSERT INTO EmployeePosition (EmpID, EmpPosition, DateOfJoining, Salary) 
+VALUES (1, 'Executive', TO_DATE('2024-05-01', 'YYYY-MM-DD'), 300000);
+
+--Queries for questions in Readme file
+
 --select * from employeeinfo;
 --select * from EmployeePosition;
 --select upper(EMPFNAME) as EmpName from employeeinfo;
